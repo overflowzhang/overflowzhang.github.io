@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.overflowzhang.top</id>
     <title>莫比乌斯的小纸条</title>
-    <updated>2019-06-30T08:10:18.563Z</updated>
+    <updated>2019-07-11T09:51:36.824Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.overflowzhang.top"/>
     <link rel="self" href="https://www.overflowzhang.top/atom.xml"/>
@@ -10,4 +10,14 @@
     <logo>https://www.overflowzhang.top/images/avatar.png</logo>
     <icon>https://www.overflowzhang.top/favicon.ico</icon>
     <rights>All rights reserved 2019, 莫比乌斯的小纸条</rights>
+    <entry>
+        <title type="html"><![CDATA[Flag]]></title>
+        <id>https://www.overflowzhang.top/post/flag</id>
+        <link href="https://www.overflowzhang.top/post/flag">
+        </link>
+        <updated>2019-07-11T09:45:14.000Z</updated>
+        <content type="html"><![CDATA[<p>致2020年的自己：
+See you in BUPT ~</p>
+]]></content>
+    </entry>
 </feed>
