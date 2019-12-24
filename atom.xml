@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://www.overflowzhang.cn</id>
     <title>莫比乌斯的小纸条</title>
-    <updated>2019-12-24T06:00:39.349Z</updated>
+    <updated>2019-12-24T06:10:26.220Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://www.overflowzhang.cn"/>
     <link rel="self" href="http://www.overflowzhang.cn/atom.xml"/>
@@ -16,7 +16,7 @@
         <link href="http://www.overflowzhang.cn/post/flag">
         </link>
         <updated>2019-07-11T09:45:14.000Z</updated>
-        <content type="html"><![CDATA[<p>致2020年的自己：
+        <content type="html"><![CDATA[<p>致2020年的自己：<br>
 See you in BUPT ~</p>
 ]]></content>
     </entry>
