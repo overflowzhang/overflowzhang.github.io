@@ -16,20 +16,20 @@
   <meta name="author" content="虹猫少侠">
   <meta name="keywords" content="">
   
-    <meta name="description" content="title: Demolayout: aboutdate: 2021-12-31 17:00:00comment: ‘valine’               Java                          Python                          Golang">
+    <meta name="description" content="KubeEdge 是怎么解决边缘自治的呢？  KubeEdge 是如何做到云边协同（一致性）的呢？  当云边通信恢复之后，节点状态同步是怎样去做的？  K8s 对边缘节点的操作都有哪些？  KubeEdge 在云端的核心组件是 CloudCore，包括哪些组件？  CloudHub 主要是负责什么 ？  K8s 能不能做一个介绍，比如包括哪几个服务组件，网络通信是怎么做的？  一个服务想对外暴露">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Demo">
-<meta property="og:url" content="http://example.com/2021/12/31/Demo/index.html">
+<meta property="og:title" content="阿里云-云原生II">
+<meta property="og:url" content="http://example.com/2022/03/19/%E9%98%BF%E9%87%8C%E4%BA%91-%E4%BA%91%E5%8E%9F%E7%94%9FII/index.html">
 <meta property="og:site_name" content="莫比乌斯的小纸条">
-<meta property="og:description" content="title: Demolayout: aboutdate: 2021-12-31 17:00:00comment: ‘valine’               Java                          Python                          Golang">
+<meta property="og:description" content="KubeEdge 是怎么解决边缘自治的呢？  KubeEdge 是如何做到云边协同（一致性）的呢？  当云边通信恢复之后，节点状态同步是怎样去做的？  K8s 对边缘节点的操作都有哪些？  KubeEdge 在云端的核心组件是 CloudCore，包括哪些组件？  CloudHub 主要是负责什么 ？  K8s 能不能做一个介绍，比如包括哪几个服务组件，网络通信是怎么做的？  一个服务想对外暴露">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-31T09:00:45.000Z">
-<meta property="article:modified_time" content="2021-12-31T09:05:03.787Z">
+<meta property="article:published_time" content="2022-03-19T13:48:06.000Z">
+<meta property="article:modified_time" content="2022-03-19T13:57:25.412Z">
 <meta property="article:author" content="虹猫少侠">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>Demo - 莫比乌斯的小纸条</title>
+  <title>阿里云-云原生II - 莫比乌斯的小纸条</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Demo">
+            <span class="h2" id="subtitle" title="阿里云-云原生II">
               
             </span>
 
@@ -190,8 +190,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-31 17:00" pubdate>
-        2021年12月31日 下午
+      <time datetime="2022-03-19 21:48" pubdate>
+        2022年3月19日 晚上
       </time>
     </span>
   
@@ -201,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      77 字
+      1.1k 字
     </span>
   
 
@@ -210,7 +210,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1 分钟
+      6 分钟
     </span>
   
 
@@ -247,28 +247,103 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Demo</h1>
+            <h1 style="display: none">阿里云-云原生II</h1>
             
             <div class="markdown-body">
-              <hr>
-<p>title: Demo<br>layout: about<br>date: 2021-12-31 17:00:00<br>comment: ‘valine’</p>
-<hr>
-<div class="note note-success">
-            <p>Java</p>
-          </div>
-
-<div class="note note-primary">
-            <p>Python</p>
-          </div>
-
-<div class="note note-info">
-            <p>Golang</p>
-          </div>
+              <ol>
+<li><p>KubeEdge 是怎么解决<strong>边缘自治</strong>的呢？</p>
+</li>
+<li><p>KubeEdge 是如何做到<strong>云边协同</strong>（一致性）的呢？</p>
+</li>
+<li><p>当云边通信恢复之后，节点<strong>状态同步</strong>是怎样去做的？</p>
+</li>
+<li><p>K8s 对边缘节点的操作都有哪些？</p>
+</li>
+<li><p>KubeEdge 在云端的核心组件是 CloudCore，包括哪些组件？</p>
+</li>
+<li><p>CloudHub 主要是负责什么 ？</p>
+</li>
+<li><p>K8s 能不能做一个介绍，比如包括哪几个服务组件，网络通信是怎么做的？</p>
+</li>
+<li><p>一个服务想对外暴露接口，有哪几种方式呢？</p>
+</li>
+<li><p>能讲一下 K8s 的网络是怎样通信的吗 ？</p>
+</li>
+<li><p>K8s 的一个 <strong>Pod</strong> 中容器与<strong>容器</strong>之间是如何通信的，Pod 之间是如何通信的 ？</p>
+</li>
+<li><p>不同 Node 之间是如何通信的呢 ？</p>
+</li>
+<li><p>有了解过 <strong>RBAC 权限模型</strong>吗 ？</p>
+</li>
+<li><p>如何从海量数据中过滤出有访问权限的数据 ？</p>
+</li>
+<li><p>有考虑过大量的数据读取的这种权限设计吗 ？</p>
+</li>
+<li><p>使用 WebSocket 会有什么劣势，相比于 Ajax，优缺点 ？</p>
+</li>
+<li><p>我看你用过 MySQL，说说常用的<strong>存储引擎</strong> ？</p>
+</li>
+<li><p>能不能讲一下 InnoDB 引擎的<strong>索引</strong>是用什么数据结构实现的 ？</p>
+</li>
+<li><p>InnoDB 为什么选用 <strong>B+ 树</strong>，而不用红黑树或者二叉树呢 ？</p>
+</li>
+<li><p>比如现在在 A-B-C上 建立了一个<strong>联合索引</strong>，SQL 中 where B= and C= ，请问这种情况下能不能命中联合索引 ？</p>
+</li>
+<li><p>那不能用联合索引的原因是什么 ？</p>
+</li>
+<li><p>比如我有一个慢 SQL，我想查这个 <strong>SQL</strong> 为什么这么慢，怎么去查，讲一下<strong>排查</strong>过程？</p>
+</li>
+<li><p><strong>explain</strong> 命令有用过吗 ？</p>
+</li>
+<li><p>有了解过 MySQL 的<strong>读锁</strong>和<strong>排他锁</strong>这些吗 ？</p>
+</li>
+<li><p><strong>I/O 多路复用</strong>里面有 select、poll、epoll，能不能讲一下这个 ？</p>
+</li>
+<li><p>那你讲一下 TCP 为什么要做<strong>三次握手</strong>和<strong>四次挥手</strong>，还有对应的<strong>状态迁移</strong> ？</p>
+</li>
+<li><p>HTTP 1.0、<strong>HTTP</strong> 1.1、HTTP 2.0 它们的区别能不能讲一下 ？</p>
+</li>
+<li><p>聊一下 Java，想问一下你 Java 大概有多少行的代码量，大概估一下，给个量级 ？</p>
+</li>
+<li><p><strong>Spring</strong> 框架主要解决了什么问题，SpringBoot 和 SpringCloud 有什么区别 ？</p>
+</li>
+<li><p>你有了解过 Nacos 和 Eureka 吗 ？</p>
+</li>
+<li><p>聊一下<strong>JVM</strong>， JVM 的<strong>内存区域</strong> ？ </p>
+</li>
+<li><p>一定不会出现 <strong>OOM</strong> 的是哪些区域，那为什么其他的区域都会发生 OOM 呢 ？</p>
+</li>
+<li><p><strong>Mybatis</strong> 有用过吗，那它是怎么解决 <strong>SQL 注入</strong>的 ？</p>
+</li>
+<li><p>Java 的<strong>线程池</strong>有哪些，它的默认的<strong>处理策略</strong>有哪几种 ？</p>
+</li>
+<li><p>Java 的 AIO、<strong>NIO</strong>、BIO 能不能介绍一下它们的区别 ？</p>
+</li>
+<li><p>Java 的 <strong>Collection</strong> 和 <strong>Collections</strong> 有什么区别 ？</p>
+</li>
+<li><p><strong>HashMap</strong> 能大概讲一下吗 ？</p>
+</li>
+<li><p>JDK 1.8 中的 HashMap 为什么要加上<strong>红黑树</strong>这个结构呢 ？</p>
+</li>
+<li><p>链表长度超过 8 会转换成红黑树，那什么时候会退化成链表呢 ？</p>
+</li>
+<li><p>HashMap 是线程非安全的，如果我想用线程安全的，怎么办 ？</p>
+</li>
+<li><p><strong>ConcurrentHashMap</strong> 是怎么保证线程安全的 ？</p>
+</li>
+</ol>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%A2%E7%BB%8F/">面经</a>
+                    
+                  </div>
                 
                 
               </div>
@@ -284,9 +359,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/01/05/Linux-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/">
+                      <a href="/2022/03/19/%E9%98%BF%E9%87%8C%E4%BA%91-%E5%AE%89%E5%85%A8/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Linux-常用操作</span>
+                        <span class="hidden-mobile">阿里云-安全</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -294,8 +369,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/12/31/hello-world/">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2022/03/18/JVM-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%96%B9%E6%B3%95/">
+                        <span class="hidden-mobile">JVM-垃圾回收方法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -310,6 +385,14 @@
         </div>
       </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
     
   </div>
 </div>
@@ -400,6 +483,8 @@
 
 
 
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
   
   
     <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>

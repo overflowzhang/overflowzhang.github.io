@@ -16,20 +16,20 @@
   <meta name="author" content="虹猫少侠">
   <meta name="keywords" content="">
   
-    <meta name="description" content="浏览器输入网址到最终渲染页面，发生了什么过程 ？ 其中用到了很多的协议，寻址用的是哪个协议 ？ 从IP 地址转换成 MAC 地址用的是哪个协议 ？ RARP协议 你能详细讲一下吗？ 讲一下 TCP 的三次握手 ？ TCP 两次握手可以吗，为什么要三次 ？ 在四次挥手的过程中，会有一个等待时间，是多少，有什么意义？ MSL 你了解吗 ？ TCP 的拥塞控制，能讲一下你的理解吗 ？ 解决哈希碰撞的方">
+    <meta name="description" content="你对 SpringCloud 是怎么理解的 ？  断路器它是什么作用 ?  SpringCloud 和 SpringBoot 有什么区别 ？  说说你对 MVC 的了解 ？  Java 中的几种引用类型，有什么区别 ？  Java 中有个类叫 ThreadLocal，知道它是怎么实现的吗 ？  volatile 是干嘛的，实现原理是什么 ？  在实际开发中用到过 ThreadLocal 吗 ？">
 <meta property="og:type" content="article">
-<meta property="og:title" content="阿里云-云原生-容器团队（一面）">
-<meta property="og:url" content="http://example.com/2022/02/14/%E9%98%BF%E9%87%8C%E4%BA%91-%E4%BA%91%E5%8E%9F%E7%94%9F-%E5%AE%B9%E5%99%A8%E5%9B%A2%E9%98%9F%EF%BC%88%E4%B8%80%E9%9D%A2%EF%BC%89/index.html">
+<meta property="og:title" content="京东云">
+<meta property="og:url" content="http://example.com/2022/03/19/%E4%BA%AC%E4%B8%9C%E4%BA%91/index.html">
 <meta property="og:site_name" content="莫比乌斯的小纸条">
-<meta property="og:description" content="浏览器输入网址到最终渲染页面，发生了什么过程 ？ 其中用到了很多的协议，寻址用的是哪个协议 ？ 从IP 地址转换成 MAC 地址用的是哪个协议 ？ RARP协议 你能详细讲一下吗？ 讲一下 TCP 的三次握手 ？ TCP 两次握手可以吗，为什么要三次 ？ 在四次挥手的过程中，会有一个等待时间，是多少，有什么意义？ MSL 你了解吗 ？ TCP 的拥塞控制，能讲一下你的理解吗 ？ 解决哈希碰撞的方">
+<meta property="og:description" content="你对 SpringCloud 是怎么理解的 ？  断路器它是什么作用 ?  SpringCloud 和 SpringBoot 有什么区别 ？  说说你对 MVC 的了解 ？  Java 中的几种引用类型，有什么区别 ？  Java 中有个类叫 ThreadLocal，知道它是怎么实现的吗 ？  volatile 是干嘛的，实现原理是什么 ？  在实际开发中用到过 ThreadLocal 吗 ？">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-02-14T13:09:52.000Z">
-<meta property="article:modified_time" content="2022-03-17T12:27:10.628Z">
+<meta property="article:published_time" content="2022-03-19T13:49:40.000Z">
+<meta property="article:modified_time" content="2022-03-19T14:04:16.348Z">
 <meta property="article:author" content="虹猫少侠">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>阿里云-云原生-容器团队（一面） - 莫比乌斯的小纸条</title>
+  <title>京东云 - 莫比乌斯的小纸条</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="阿里云-云原生-容器团队（一面）">
+            <span class="h2" id="subtitle" title="京东云">
               
             </span>
 
@@ -190,8 +190,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-02-14 21:09" pubdate>
-        2022年2月14日 晚上
+      <time datetime="2022-03-19 21:49" pubdate>
+        2022年3月19日 晚上
       </time>
     </span>
   
@@ -201,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      556 字
+      677 字
     </span>
   
 
@@ -210,7 +210,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3 分钟
+      4 分钟
     </span>
   
 
@@ -247,39 +247,84 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">阿里云-云原生-容器团队（一面）</h1>
+            <h1 style="display: none">京东云</h1>
             
             <div class="markdown-body">
               <ol>
-<li>浏览器输入网址到最终渲染页面，发生了什么过程 ？</li>
-<li>其中用到了很多的协议，寻址用的是哪个协议 ？</li>
-<li>从IP 地址转换成 MAC 地址用的是哪个协议 ？</li>
-<li>RARP协议 你能详细讲一下吗？</li>
-<li>讲一下 TCP 的三次握手 ？</li>
-<li>TCP 两次握手可以吗，为什么要三次 ？</li>
-<li>在四次挥手的过程中，会有一个等待时间，是多少，有什么意义？</li>
-<li>MSL 你了解吗 ？</li>
-<li>TCP 的拥塞控制，能讲一下你的理解吗 ？</li>
-<li>解决哈希碰撞的方法主要有哪些 ？</li>
-<li>什么情况下用链地址法用的比较多 ？</li>
-<li>进程、线程和协程之间的区别和联系，你能讲一下吗 ？</li>
-<li>你了解到的进程间的通信方式有哪些 ？</li>
-<li>在内存分配过程中，堆区和栈区的区别 ？</li>
-<li>你对数据结构中堆、栈、队列的理解 ？</li>
-<li>Java 中的多态你能讲一下吗 ？</li>
-<li>Java 中的覆盖和重载，你能讲一下吗 ？</li>
-<li>设计模式，你能稍微讲一下吗 ？</li>
-<li>说到了单例模式，每种实现方式的优缺点 ？</li>
-<li>懒加载又分为哪些 ？线程安全的和线程不安全，说说线程安全的缺点 ？</li>
-<li>HashMap 有哪几种遍历方式 ？</li>
-<li>讲一下你理解的 StringBuffer 和 StringBuilder 的区别 ？</li>
-<li>主流的垃圾回收算法主要有哪些 ？</li>
-<li>想了解一下你对 Linux 的熟悉程度 ？</li>
-<li>你常用的 shell 命令都有哪些？</li>
-<li>查找、截取是通过什么命令 ？</li>
-<li>你用过 grep 的查找，有没有用过正则匹配 ？</li>
-<li>节点内存占用过高，你排查过这样的问题吗 ？</li>
-<li>了解 Kubernetes 是通过什么途径了解，知道的有什么 ？</li>
+<li><p>你对 SpringCloud 是怎么理解的 ？</p>
+</li>
+<li><p>断路器它是什么作用 ?</p>
+</li>
+<li><p>SpringCloud 和 SpringBoot 有什么区别 ？</p>
+</li>
+<li><p>说说你对 MVC 的了解 ？</p>
+</li>
+<li><p>Java 中的几种引用类型，有什么区别 ？</p>
+</li>
+<li><p>Java 中有个类叫 ThreadLocal，知道它是怎么实现的吗 ？</p>
+</li>
+<li><p>volatile 是干嘛的，实现原理是什么 ？</p>
+</li>
+<li><p>在实际开发中用到过 ThreadLocal 吗 ？</p>
+</li>
+<li><p>对象比较时，equals 和 == 的区别 ？</p>
+</li>
+<li><p>String s = new String(“a”) 过程创建了几个对象 ？</p>
+</li>
+<li><p>说一下抽象类和接口的区别 ？</p>
+</li>
+<li><p>说说你对 Java 中多态的理解 ？</p>
+</li>
+<li><p>方法的重载 ？</p>
+</li>
+<li><p>volatile 能防止指令重排，讲一下什么是指令重排 ？</p>
+</li>
+<li><p>Java 多线程的了解 ？</p>
+</li>
+<li><p>对垃圾回收有什么了解 ？</p>
+</li>
+<li><p>运行时常量池在什么地方 ？</p>
+</li>
+<li><p>新生代和老年代默认的分配比例 ？</p>
+</li>
+<li><p>调整 Eden 和 Survivor 的比例大小用到哪个参数 ？</p>
+</li>
+<li><p>针对 JVM 调优，主要会用到哪些参数 ？</p>
+</li>
+<li><p>ConcurrentHashMap 的实现原理 ？</p>
+</li>
+<li><p>CAS 是一个什么样的机制 ？</p>
+</li>
+<li><p>Java 里面哪个类里面提供了 CAS 操作 ？</p>
+</li>
+<li><p>自旋锁是一个什么样的概念 ？</p>
+</li>
+<li><p>Linux 中常用的命令 ？</p>
+</li>
+<li><p>在一个比较大的文件中搜索一个关键字，怎么搜索 ？</p>
+</li>
+<li><p>MySQL 中的事务有几种隔离级别 ？</p>
+</li>
+<li><p>MySQL 中的可重复读是如何实现的 ？</p>
+</li>
+<li><p>undo log 是什么时候删掉的 ？</p>
+</li>
+<li><p>如何写一个高效的SQL 查询语句 ？</p>
+</li>
+<li><p>索引覆盖是什么概念 ？</p>
+</li>
+<li><p>要使用一个索引，要注意什么问题 ？</p>
+</li>
+<li><p>一个 varchar 类型的字段，在查询条件里赋值为数值类型的数据，能查询到数据吗 ？</p>
+</li>
+<li><p>索引用的数据结构是 B+树，为什么不用哈希表或者链表 ？</p>
+</li>
+<li><p>说一下算法中的分治思想 ？</p>
+</li>
+<li><p>你对微服务有了解吗 ？</p>
+</li>
+<li><p>SpringCloud 中是如何去做服务治理的 ？</p>
+</li>
 </ol>
 
             </div>
@@ -308,18 +353,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/18/JVM-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%96%B9%E6%B3%95/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JVM-垃圾回收方法</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/01/05/Linux-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/">
-                        <span class="hidden-mobile">Linux-常用操作</span>
+                      <a href="/2022/03/19/%E9%98%BF%E9%87%8C%E4%BA%91-%E5%AE%89%E5%85%A8/">
+                        <span class="hidden-mobile">阿里云-安全</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -334,6 +373,14 @@
         </div>
       </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
     
   </div>
 </div>
@@ -424,6 +471,8 @@
 
 
 
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
   
   
     <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
