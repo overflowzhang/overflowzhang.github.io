@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>MySQL-事务</title>
+    <link href="/2022/03/20/MySQL-%E4%BA%8B%E5%8A%A1/"/>
+    <url>/2022/03/20/MySQL-%E4%BA%8B%E5%8A%A1/</url>
+    
+    <content type="html"><![CDATA[<h3 id="一、事务的特性"><a href="#一、事务的特性" class="headerlink" title="一、事务的特性"></a>一、事务的特性</h3><ol><li>原子性（Atomicity）</li><li>一致性（Consistency）</li><li>隔离性（Isolation）</li><li>持久性（Durability）</li></ol><p>相关语法：</p><h3 id="二、事务并发执行时遇到的一致性问题"><a href="#二、事务并发执行时遇到的一致性问题" class="headerlink" title="二、事务并发执行时遇到的一致性问题"></a>二、事务并发执行时遇到的一致性问题</h3><ol><li><p>脏写</p><blockquote><p>一个事务修改了另一个未提交事务修改过的数据。</p></blockquote></li><li><p>脏读</p><blockquote><p>一个事务堵到了另一个未提交事务修改过的数据。</p></blockquote></li><li><p>不可重复读</p><blockquote><p>一个事务修改了另一个未提交事务读取的数据。</p></blockquote></li><li><p>幻读</p><blockquote><p>一个事务先根据某些搜索条件查询出一些记录，在该事务未提交时，另一个事务写入了一些符合那些搜索条件的记录。</p></blockquote></li></ol><h3 id="三、事务隔离级别"><a href="#三、事务隔离级别" class="headerlink" title="三、事务隔离级别"></a>三、事务隔离级别</h3><ol><li>读未提交</li><li>读已提交 </li><li>可重复读</li><li>串行化</li></ol><table><thead><tr><th>隔离级别</th><th>脏读</th><th>不可重复读</th><th>幻读</th></tr></thead><tbody><tr><td>读未提交</td><td>可能</td><td>可能</td><td>可能</td></tr><tr><td>读已提交</td><td>不可能</td><td>可能</td><td>可能</td></tr><tr><td>可重复读</td><td>不可能</td><td>不可能</td><td>可能</td></tr><tr><td>串行化</td><td>不可能</td><td>不可能</td><td>不可能</td></tr></tbody></table><p>相关语法：</p><h3 id="四、MVCC"><a href="#四、MVCC" class="headerlink" title="四、MVCC"></a>四、MVCC</h3><h5 id="版本链"><a href="#版本链" class="headerlink" title="版本链"></a>版本链</h5><p>对于使用 InnoDB 存储引擎的表，聚簇索引记录里包含两个隐藏列：</p><ol><li>trx_id: 一个事务每次对某条聚簇索引记录进行改动时，都会把改事务的事务 id 赋值给 trx_id 隐藏列。</li><li>roll_pointer: 每次对某条聚簇索引记录进行改动时，都会把<strong>旧的版本</strong>写入到 <strong>undo 日志</strong>中。这个隐藏列相当于一个指针，可以通过它找到该记录修改前的信息。</li></ol><blockquote><p>在每次更新记录后，都会将旧值放到一条 undo 日志中（旧版本），随着更新次数的增多，所有的版本都会被 roll_pointer 属性连接成一个链表，这个链表称为<strong>版本链</strong>。版本链的头结点就是当前记录的最新值。利用版本链来<strong>控制并发事务访问相同记录</strong>的机制称为多版本并发控制。</p></blockquote><p><img src="https://raw.githubusercontent.com/overflowzhang/Image-Hosting/master/MVCC.png"></p><h5 id="ReadView"><a href="#ReadView" class="headerlink" title="ReadView"></a>ReadView</h5><ul><li>读未提交级别：直接读取记录的最新版本</li><li>串行化：采用加锁的方式来访问记录</li></ul><div class="note note-success">            <p><strong>读提交</strong>和<strong>可重复读</strong>级别如何判断版本链中的哪个版本是当前事务可见的 ？</p>          </div><p>ReadView 相当于一个快照，包括以下内容：</p><ul><li><p>m_id</p><blockquote><p>在生成 ReadView 时，当前系统中活跃的读写事务的事务id列表。“活跃”指的是启动了但没提交。</p></blockquote></li><li><p>min_trx_id</p><blockquote><p>m_id 中的最小值。</p></blockquote></li><li><p>max_trx_id</p><blockquote><p>在生成 ReadView 时，系统应该分配给下一个事务的事务id值。</p></blockquote></li><li><p>creator_trx_id</p><blockquote><p>生成该 ReadView 的事务的事务id。</p></blockquote></li></ul><p><img src="https://raw.githubusercontent.com/overflowzhang/Image-Hosting/master/read-view.png"></p><p>判断记录的某个版本是否可见的步骤：</p><ol><li>如果被访问版本的 trx_id 与 ReadView 中的 creator_trx_id 值相同，即事务在访问它自己修改过的记录，所以该版本可以被当前事务访问。</li><li>如果 trx_id ＜ min_trx_id 值，表明生成该版本的事务在当前事务生成 ReadView 之前已提交，故可见。</li><li>如果 trx_id ≥ max_trx_id 值，表明生成该版本的事务对于当前 ReadView 是未开始事务，故不可见。</li><li>如果 min_trx_id ≤ trx_id &lt; max_trx_id，需判断 trx_id 是否在<strong>活跃事务列表</strong>，在，说明创建该版本的事务处于活跃状态，不可见，否则，说明事务已提交，可见。</li></ol><blockquote><p>如果某个版本的事务对当前事务不可见，那就顺着版本链找到下一个版本的数据，并继续执行上面的步骤来判断记录的可见性。</p></blockquote><div class="note note-success">            <p><strong>读提交 VS 可重复读</strong></p>          </div><ol><li>读提交：<strong>每次读取数据前</strong>都生成一个 ReadView</li><li>可重复读：在<strong>第一次读取数据时</strong>生成一个 ReadView</li></ol><div class="note note-success">            <p><strong>关于 purge</strong></p>          </div><ul><li>insert undo 日志在事务提交之后就可以释放掉了，而 update undo 日志由于还需要支持 MVCC，因此不能立即删除掉。</li><li>为了支持 MVCC，delete mark 操作仅仅是在记录上打一个删除标记，并没有真正将记录删除。</li></ul><blockquote><p>在合适的时候把 update undo 日志以及仅仅被标记为删除的记录彻底删除掉，这个删除操作称为 <strong>purge</strong>。</p></blockquote><p>参考：</p><p>《MySQL是怎样运行的》</p><p>《MySQL实战45讲》</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>MySQL</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>JVM-垃圾回收方法</title>
     <link href="/2022/03/18/JVM-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%96%B9%E6%B3%95/"/>
     <url>/2022/03/18/JVM-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%96%B9%E6%B3%95/</url>
