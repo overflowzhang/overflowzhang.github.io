@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/overflowzhang/Image-Hosting/master/sun_moon.ico">
-  <link rel="icon" href="https://raw.githubusercontent.com/overflowzhang/Image-Hosting/master/sun_moon.ico">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/sun_moon.ico">
+  <link rel="icon" href="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/sun_moon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="莫比乌斯的小纸条">
 <meta property="og:description" content="一、归并思想：分治 确定分界点  mid &#x3D;（left + right) &#x2F; 2   递归排序  [left…mid] | [mid+1…right]   归并 &#x3D;&gt; 合二为一   二、具体过程 三、代码模板123456789101112131415161718192021222324252627282930public void merge(int[] nums, int left, in">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/overflowzhang/Image-Hosting/master/mergesort.png">
+<meta property="og:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.png">
 <meta property="article:published_time" content="2022-03-25T06:25:12.000Z">
-<meta property="article:modified_time" content="2022-03-26T05:21:45.443Z">
+<meta property="article:modified_time" content="2022-03-26T07:53:35.404Z">
 <meta property="article:author" content="虹猫少侠">
 <meta property="article:tag" content="模板">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/overflowzhang/Image-Hosting/master/mergesort.png">
+<meta name="twitter:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.png">
   
   
   <title>归并排序 - 莫比乌斯的小纸条</title>
@@ -267,7 +267,7 @@
 <li><p>归并 =&gt; 合二为一</p>
 </li>
 </ol>
-<h3 id="二、具体过程"><a href="#二、具体过程" class="headerlink" title="二、具体过程"></a>二、具体过程</h3><p><img src="https://raw.githubusercontent.com/overflowzhang/Image-Hosting/master/mergesort.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="二、具体过程"><a href="#二、具体过程" class="headerlink" title="二、具体过程"></a>二、具体过程</h3><p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="三、代码模板"><a href="#三、代码模板" class="headerlink" title="三、代码模板"></a>三、代码模板</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> mid = (left + right) &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (left &lt; right) &#123;<br>        merge(nums, left, mid);<br>        merge(nums, mid + <span class="hljs-number">1</span>, right);<br>        mergeSort(nums, left, mid, right);<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">mergeSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> mid, <span class="hljs-keyword">int</span> right)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span>[] tmp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[right - left + <span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">int</span> index = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">int</span> L = left, R = mid + <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span> (L &lt;= mid &amp;&amp; R &lt;= right) &#123;<br>        <span class="hljs-keyword">if</span> (nums[L] &lt;= nums[R]) &#123;<br>            tmp[index ++] = nums[L ++];<br>        &#125; <span class="hljs-keyword">else</span> &#123;	<br>            tmp[index ++] = nums[R ++];<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">while</span> (L &lt;= mid) &#123;<br>        tmp[index ++] = nums[L ++];<br>    &#125;<br>    <span class="hljs-keyword">while</span> (R &lt;= right) &#123;<br>        tmp[index ++] = nums[R ++];<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; tmp.length; k ++) &#123;<br>        nums[k + left] = tmp[k];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
@@ -307,6 +307,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/03/26/%E5%A0%86%E6%8E%92%E5%BA%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">堆排序</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
