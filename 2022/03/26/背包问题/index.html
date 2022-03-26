@@ -16,24 +16,23 @@
   <meta name="author" content="虹猫少侠">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、堆排序思想 将序列构造成一个小（大）根堆  根节点是序列的最小（大）值，交换头尾元素    swap(h[1], h[size –])    对头结点执行 down 操作，维护堆  二、具体过程1.建立初始堆 2.头尾交换 三、代码模板 (小根堆)1.建立初始堆123for (int i &#x3D; n &#x2F; 2; i &gt; 0; i --) &amp;#123;    down(i);&amp;#125;  2.">
+    <meta name="description" content="一、01背包1.整体思路 2.代码模板1234567891011int[][] dp &#x3D; new int[N + 1][V + 1];dp[0][0] &#x3D; 0;for(int i &#x3D; 1; i &lt;&#x3D; N; i++)&amp;#123;    for(int j &#x3D; 0; j &lt;&#x3D; V; j++) &amp;#123;        dp[i][j] &#x3D; dp[i - 1][j];        if(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="堆排序">
-<meta property="og:url" content="http://example.com/2022/03/26/%E5%A0%86%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:title" content="背包问题">
+<meta property="og:url" content="http://example.com/2022/03/26/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="莫比乌斯的小纸条">
-<meta property="og:description" content="一、堆排序思想 将序列构造成一个小（大）根堆  根节点是序列的最小（大）值，交换头尾元素    swap(h[1], h[size –])    对头结点执行 down 操作，维护堆  二、具体过程1.建立初始堆 2.头尾交换 三、代码模板 (小根堆)1.建立初始堆123for (int i &#x3D; n &#x2F; 2; i &gt; 0; i --) &amp;#123;    down(i);&amp;#125;  2.">
+<meta property="og:description" content="一、01背包1.整体思路 2.代码模板1234567891011int[][] dp &#x3D; new int[N + 1][V + 1];dp[0][0] &#x3D; 0;for(int i &#x3D; 1; i &lt;&#x3D; N; i++)&amp;#123;    for(int j &#x3D; 0; j &lt;&#x3D; V; j++) &amp;#123;        dp[i][j] &#x3D; dp[i - 1][j];        if(">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E5%A0%86%E6%8E%92%E5%BA%8F01.png">
-<meta property="og:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E5%A0%86%E6%8E%92%E5%BA%8F02.png">
-<meta property="article:published_time" content="2022-03-26T05:27:16.000Z">
-<meta property="article:modified_time" content="2022-03-26T08:50:19.924Z">
+<meta property="og:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/01%E8%83%8C%E5%8C%85.png">
+<meta property="article:published_time" content="2022-03-26T09:14:01.000Z">
+<meta property="article:modified_time" content="2022-03-26T09:33:04.028Z">
 <meta property="article:author" content="虹猫少侠">
-<meta property="article:tag" content="模板">
+<meta property="article:tag" content="模板, DP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E5%A0%86%E6%8E%92%E5%BA%8F01.png">
+<meta name="twitter:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/01%E8%83%8C%E5%8C%85.png">
   
   
-  <title>堆排序 - 莫比乌斯的小纸条</title>
+  <title>背包问题 - 莫比乌斯的小纸条</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -179,7 +178,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="堆排序">
+            <span class="h2" id="subtitle" title="背包问题">
               
             </span>
 
@@ -194,7 +193,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-26 13:27" pubdate>
+      <time datetime="2022-03-26 17:14" pubdate>
         2022年3月26日 下午
       </time>
     </span>
@@ -205,7 +204,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1k 字
+      488 字
     </span>
   
 
@@ -214,7 +213,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6 分钟
+      3 分钟
     </span>
   
 
@@ -251,30 +250,21 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">堆排序</h1>
+            <h1 style="display: none">背包问题</h1>
             
             <div class="markdown-body">
-              <h3 id="一、堆排序思想"><a href="#一、堆排序思想" class="headerlink" title="一、堆排序思想"></a>一、堆排序思想</h3><ol>
-<li><p>将序列构造成一个小（大）根堆</p>
-</li>
-<li><p>根节点是序列的最小（大）值，交换头尾元素</p>
-</li>
-</ol>
-<blockquote>
-<p>swap(h[1], h[size –]) </p>
-</blockquote>
-<ol start="3">
-<li>对头结点执行 down 操作，维护堆</li>
-</ol>
-<h3 id="二、具体过程"><a href="#二、具体过程" class="headerlink" title="二、具体过程"></a>二、具体过程</h3><h5 id="1-建立初始堆"><a href="#1-建立初始堆" class="headerlink" title="1.建立初始堆"></a>1.建立初始堆</h5><p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E5%A0%86%E6%8E%92%E5%BA%8F01.png" srcset="/img/loading.gif" lazyload></p>
-<h5 id="2-头尾交换"><a href="#2-头尾交换" class="headerlink" title="2.头尾交换"></a>2.头尾交换</h5><p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E5%A0%86%E6%8E%92%E5%BA%8F02.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="三、代码模板-小根堆"><a href="#三、代码模板-小根堆" class="headerlink" title="三、代码模板 (小根堆)"></a>三、代码模板 (小根堆)</h3><h5 id="1-建立初始堆-1"><a href="#1-建立初始堆-1" class="headerlink" title="1.建立初始堆"></a>1.建立初始堆</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n / <span class="hljs-number">2</span>; i &gt; <span class="hljs-number">0</span>; i --) &#123;<br>    down(i);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+              <h3 id="一、01背包"><a href="#一、01背包" class="headerlink" title="一、01背包"></a>一、01背包</h3><h5 id="1-整体思路"><a href="#1-整体思路" class="headerlink" title="1.整体思路"></a>1.整体思路</h5><p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/01%E8%83%8C%E5%8C%85.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="2-代码模板"><a href="#2-代码模板" class="headerlink" title="2.代码模板"></a>2.代码模板</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[N + <span class="hljs-number">1</span>][V + <span class="hljs-number">1</span>];<br>dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; i++)&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt;= V; j++) &#123;<br>        dp[i][j] = dp[i - <span class="hljs-number">1</span>][j];<br>        <span class="hljs-keyword">if</span>(j &gt;= v[i]) &#123;<br>            dp[i][j] = Math.max(dp[i - <span class="hljs-number">1</span>][j], dp[i - <span class="hljs-number">1</span>][j - v[i]] + w[i]);<br>        &#125;<br>    &#125;<br>&#125;<br>System.out.println(dp[N][V]);<br></code></pre></div></td></tr></table></figure>
 
-<h5 id="2-头尾交换，元素下沉"><a href="#2-头尾交换，元素下沉" class="headerlink" title="2.头尾交换，元素下沉"></a>2.头尾交换，元素下沉</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 大元素下沉</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">down</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> t = u;<br>    <span class="hljs-comment">// 下标从 1 开始</span><br>    <span class="hljs-keyword">if</span> (u * <span class="hljs-number">2</span> &lt;= size &amp;&amp; h[u * <span class="hljs-number">2</span>] &lt; h[t]) &#123;<br>        t = u * <span class="hljs-number">2</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (u * <span class="hljs-number">2</span> + <span class="hljs-number">1</span> &lt;= size &amp;&amp; h[u * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>] &lt; h[t]) &#123;<br>        t = u * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (u != t) &#123;<br>        <span class="hljs-keyword">int</span> tmp = h[t];<br>        h[t] = h[u];<br>        h[u] = tmp;<br>        down(t);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-
-<h3 id="四、数组中的第K个最大元素"><a href="#四、数组中的第K个最大元素" class="headerlink" title="四、数组中的第K个最大元素"></a>四、<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/">数组中的第K个最大元素</a></h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span>[] h;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> size;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">findKthLargest</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> k)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.h = nums;<br>        <span class="hljs-keyword">this</span>.size = nums.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = size / <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i --) &#123;<br>            up(i);<br>        &#125;<br>        <span class="hljs-keyword">while</span> (-- k &gt; <span class="hljs-number">0</span>) &#123;<br>            h[<span class="hljs-number">0</span>] = h[size --];<br>            up(<span class="hljs-number">0</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> h[<span class="hljs-number">0</span>];<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">up</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> t = u;<br>        <span class="hljs-comment">// 下标从0开始，左孩子下标为 2 * u + 1，右孩子下标为 2 * u + 2</span><br>        <span class="hljs-keyword">if</span> (u * <span class="hljs-number">2</span> + <span class="hljs-number">1</span> &lt;= size &amp;&amp; h[u * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>] &gt; h[t]) &#123;<br>            t = u * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (u * <span class="hljs-number">2</span> + <span class="hljs-number">2</span> &lt;= size &amp;&amp; h[u * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>] &gt; h[t]) &#123;<br>            t = u * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (u != t) &#123;<br>            <span class="hljs-keyword">int</span> tmp = h[t];<br>            h[t] = h[u];<br>            h[u] = tmp;<br>            up(t);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><strong>空间优化：二维 -&gt; 一维</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><br><span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[V + <span class="hljs-number">1</span>];<br>dp[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; i ++)&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = V; j &gt;= <span class="hljs-number">1</span>; j --)&#123;<br>        <span class="hljs-keyword">if</span>(j &gt;= v[i]) &#123;<br>            dp[j] = Math.max(dp[j], dp[j - v[i]] + w[i]);<br>        &#125;<br>    &#125;<br>&#125;<br>System.out.println(dp[V]);<br><br></code></pre></div></td></tr></table></figure>
 
 
+
+
+
+<hr>
+<h3 id="二、完全背包"><a href="#二、完全背包" class="headerlink" title="二、完全背包"></a>二、完全背包</h3>
             </div>
             <hr>
             <div>
@@ -291,7 +281,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%9D%BF/">模板</a>
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%9D%BF-DP/">模板, DP</a>
                     
                   </div>
                 
@@ -308,18 +298,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/26/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">背包问题</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/25/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
-                        <span class="hidden-mobile">归并排序</span>
+                      <a href="/2022/03/26/%E5%A0%86%E6%8E%92%E5%BA%8F/">
+                        <span class="hidden-mobile">堆排序</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
