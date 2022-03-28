@@ -16,23 +16,24 @@
   <meta name="author" content="虹猫少侠">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、01背包1.整体思路 2.代码模板12345678910int[][] dp &#x3D; new int[N + 1][V + 1];for(int i &#x3D; 1; i &lt;&#x3D; N; i++)&amp;#123;    for(int j &#x3D; 1; j &lt;&#x3D; V; j++) &amp;#123;        dp[i][j] &#x3D; dp[i - 1][j];        if(j &gt;&#x3D; v[i]) &amp;">
+    <meta name="description" content="一、反转链表1.代码实现12345678910111213141516class Solution &amp;#123;    public ListNode reverseList(ListNode head) &amp;#123;        if (head &#x3D;&#x3D; null || head.next &#x3D;&#x3D; null) &amp;#123;            return head;        &amp;#125;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="背包问题">
-<meta property="og:url" content="http://example.com/2022/03/26/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="翻转链表">
+<meta property="og:url" content="http://example.com/2022/03/28/%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/index.html">
 <meta property="og:site_name" content="莫比乌斯的小纸条">
-<meta property="og:description" content="一、01背包1.整体思路 2.代码模板12345678910int[][] dp &#x3D; new int[N + 1][V + 1];for(int i &#x3D; 1; i &lt;&#x3D; N; i++)&amp;#123;    for(int j &#x3D; 1; j &lt;&#x3D; V; j++) &amp;#123;        dp[i][j] &#x3D; dp[i - 1][j];        if(j &gt;&#x3D; v[i]) &amp;">
+<meta property="og:description" content="一、反转链表1.代码实现12345678910111213141516class Solution &amp;#123;    public ListNode reverseList(ListNode head) &amp;#123;        if (head &#x3D;&#x3D; null || head.next &#x3D;&#x3D; null) &amp;#123;            return head;        &amp;#125;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/01%E8%83%8C%E5%8C%85.png">
-<meta property="article:published_time" content="2022-03-26T09:14:01.000Z">
-<meta property="article:modified_time" content="2022-03-26T14:24:34.459Z">
+<meta property="og:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8II.png">
+<meta property="og:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/K%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8.png">
+<meta property="article:published_time" content="2022-03-28T05:46:42.000Z">
+<meta property="article:modified_time" content="2022-03-28T06:17:15.003Z">
 <meta property="article:author" content="虹猫少侠">
-<meta property="article:tag" content="模板, DP">
+<meta property="article:tag" content="链表">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/01%E8%83%8C%E5%8C%85.png">
+<meta name="twitter:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8II.png">
   
   
-  <title>背包问题 - 莫比乌斯的小纸条</title>
+  <title>翻转链表 - 莫比乌斯的小纸条</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -178,7 +179,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="背包问题">
+            <span class="h2" id="subtitle" title="翻转链表">
               
             </span>
 
@@ -193,8 +194,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-26 17:14" pubdate>
-        2022年3月26日 下午
+      <time datetime="2022-03-28 13:46" pubdate>
+        2022年3月28日 下午
       </time>
     </span>
   
@@ -204,7 +205,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      579 字
+      1.2k 字
     </span>
   
 
@@ -213,7 +214,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3 分钟
+      6 分钟
     </span>
   
 
@@ -250,23 +251,20 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">背包问题</h1>
+            <h1 style="display: none">翻转链表</h1>
             
             <div class="markdown-body">
-              <h3 id="一、01背包"><a href="#一、01背包" class="headerlink" title="一、01背包"></a>一、01背包</h3><h5 id="1-整体思路"><a href="#1-整体思路" class="headerlink" title="1.整体思路"></a>1.整体思路</h5><p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/01%E8%83%8C%E5%8C%85.png" srcset="/img/loading.gif" lazyload></p>
-<h5 id="2-代码模板"><a href="#2-代码模板" class="headerlink" title="2.代码模板"></a>2.代码模板</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[N + <span class="hljs-number">1</span>][V + <span class="hljs-number">1</span>];<br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; i++)&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= V; j++) &#123;<br>        dp[i][j] = dp[i - <span class="hljs-number">1</span>][j];<br>        <span class="hljs-keyword">if</span>(j &gt;= v[i]) &#123;<br>            dp[i][j] = Math.max(dp[i - <span class="hljs-number">1</span>][j], dp[i - <span class="hljs-number">1</span>][j - v[i]] + w[i]);<br>        &#125;<br>    &#125;<br>&#125;<br>System.out.println(dp[N][V]);<br></code></pre></div></td></tr></table></figure>
-
-<p><strong>空间优化：二维 -&gt; 一维</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[V + <span class="hljs-number">1</span>];<br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; i ++)&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = V; j &gt;= v[i]; j --)&#123;<br>        dp[j] = Math.max(dp[j], dp[j - v[i]] + w[i]);<br>    &#125;<br>&#125;<br>System.out.println(dp[V]);<br></code></pre></div></td></tr></table></figure>
+              <h4 id="一、反转链表"><a href="#一、反转链表" class="headerlink" title="一、反转链表"></a>一、<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-linked-list/">反转链表</a></h4><h5 id="1-代码实现"><a href="#1-代码实现" class="headerlink" title="1.代码实现"></a>1.代码实现</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode head)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (head == <span class="hljs-keyword">null</span> || head.next == <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> head;<br>        &#125;<br>        ListNode cur = head, next = cur.next, tmp;<br>        <span class="hljs-keyword">while</span> (next != <span class="hljs-keyword">null</span>) &#123;<br>            tmp = next.next;<br>            next.next = cur;<br>            cur = next;<br>            next = tmp;<br>        &#125;<br>        head.next = <span class="hljs-keyword">null</span>;<br>        <span class="hljs-keyword">return</span> cur;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
 
+<h4 id="二、反转链表-II"><a href="#二、反转链表-II" class="headerlink" title="二、反转链表 II"></a>二、<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-linked-list-ii/">反转链表 II</a></h4><h5 id="1-反转过程"><a href="#1-反转过程" class="headerlink" title="1.反转过程"></a>1.反转过程</h5><p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8II.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="2-代码实现"><a href="#2-代码实现" class="headerlink" title="2.代码实现"></a>2.代码实现</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">reverseBetween</span><span class="hljs-params">(ListNode head, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> cnt = <span class="hljs-number">0</span>;<br>        ListNode dummy = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">0</span>);<br>        dummy.next = head; <br>        ListNode pre = dummy;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; left; i ++) &#123;<br>            pre = pre.next;<br>        &#125;<br>        ListNode cur = pre.next, next;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = left; i &lt; right; i ++) &#123;<br>            next = cur.next;<br>            cur.next = next.next;<br>            next.next = pre.next;<br>            pre.next = next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dummy.next;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
-<hr>
-<h3 id="二、完全背包"><a href="#二、完全背包" class="headerlink" title="二、完全背包"></a>二、完全背包</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; i ++) &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = v[i]; j &lt;= M; j ++) &#123;<br>        dp[j] = Math.max(dp[j], dp[j - v[i]] + w[i]);<br>    &#125;<br>&#125;<br>System.out.println(dp[M]);<br></code></pre></div></td></tr></table></figure>
 
-
+<h4 id="三、K-个一组翻转链表"><a href="#三、K-个一组翻转链表" class="headerlink" title="三、K 个一组翻转链表"></a>三、<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-nodes-in-k-group/">K 个一组翻转链表</a></h4><h5 id="1-翻转过程"><a href="#1-翻转过程" class="headerlink" title="1.翻转过程"></a>1.翻转过程</h5><p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/K%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="2-代码实现-1"><a href="#2-代码实现-1" class="headerlink" title="2.代码实现"></a>2.代码实现</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">reverseKGroup</span><span class="hljs-params">(ListNode head, <span class="hljs-keyword">int</span> k)</span> </span>&#123;<br>        ListNode dummy = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">0</span>); <br>        dummy.next = head; <br>        <span class="hljs-keyword">int</span> len = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (head != <span class="hljs-keyword">null</span>) &#123;<br>            len ++;<br>            head = head.next;<br>        &#125;<br>        ListNode pre = dummy, cur = pre.next, next;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len / k; i ++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; k - <span class="hljs-number">1</span>; j ++) &#123;<br>                next = cur.next;<br>                cur.next = next.next;<br>                next.next = pre.next;<br>                pre.next = next;<br>            &#125;<br>            pre = cur;<br>            cur = pre.next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dummy.next;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
             </div>
@@ -285,7 +283,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%9D%BF-DP/">模板, DP</a>
+                      <a class="hover-with-bg" href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>
                     
                   </div>
                 
@@ -302,18 +300,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/26/%E5%8D%95%E8%B0%83%E6%A0%88/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">单调栈</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/26/%E5%A0%86%E6%8E%92%E5%BA%8F/">
-                        <span class="hidden-mobile">堆排序</span>
+                      <a href="/2022/03/26/%E5%8D%95%E8%B0%83%E6%A0%88/">
+                        <span class="hidden-mobile">单调栈</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
