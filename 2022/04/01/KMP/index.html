@@ -16,23 +16,24 @@
   <meta name="author" content="虹猫少侠">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、快排思想：分治 确定分界点 num  A[left]、A[mid]、A[random]   调整范围  使得 [左区间] ≤ num，[右区间] ≤ num   递归处理左右区间  quickSort(A, left, j); quickSort(A, j + 1, right);    二、具体过程 三、代码模板123456789101112131415161718public void q">
+    <meta name="description" content="1.求 next 数组 2.KMP 匹配过程 3.代码模板123456789101112131415161718192021222324&#x2F;&#x2F; 求 Next 数组, 下标从 1 开始int[] next &#x3D; new int[m + 1];for (int i &#x3D; 2, j &#x3D; 0; i &lt;&#x3D; m; i ++) &amp;#123;    while (j &gt; 0 &amp;&amp; p[i]">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速排序">
-<meta property="og:url" content="http://example.com/2022/03/24/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:title" content="KMP">
+<meta property="og:url" content="http://example.com/2022/04/01/KMP/index.html">
 <meta property="og:site_name" content="莫比乌斯的小纸条">
-<meta property="og:description" content="一、快排思想：分治 确定分界点 num  A[left]、A[mid]、A[random]   调整范围  使得 [左区间] ≤ num，[右区间] ≤ num   递归处理左右区间  quickSort(A, left, j); quickSort(A, j + 1, right);    二、具体过程 三、代码模板123456789101112131415161718public void q">
+<meta property="og:description" content="1.求 next 数组 2.KMP 匹配过程 3.代码模板123456789101112131415161718192021222324&#x2F;&#x2F; 求 Next 数组, 下标从 1 开始int[] next &#x3D; new int[m + 1];for (int i &#x3D; 2, j &#x3D; 0; i &lt;&#x3D; m; i ++) &amp;#123;    while (j &gt; 0 &amp;&amp; p[i]">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/quicksort.png">
-<meta property="article:published_time" content="2022-03-24T09:44:02.000Z">
-<meta property="article:modified_time" content="2022-03-26T07:53:50.503Z">
+<meta property="og:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/next.png">
+<meta property="og:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/KMP.png">
+<meta property="article:published_time" content="2022-04-01T14:40:06.000Z">
+<meta property="article:modified_time" content="2022-04-03T08:53:07.252Z">
 <meta property="article:author" content="虹猫少侠">
-<meta property="article:tag" content="模板">
+<meta property="article:tag" content="模板, KMP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/quicksort.png">
+<meta name="twitter:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/next.png">
   
   
-  <title>快速排序 - 莫比乌斯的小纸条</title>
+  <title>KMP - 莫比乌斯的小纸条</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -178,7 +179,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="快速排序">
+            <span class="h2" id="subtitle" title="KMP">
               
             </span>
 
@@ -193,8 +194,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-24 17:44" pubdate>
-        2022年3月24日 下午
+      <time datetime="2022-04-01 22:40" pubdate>
+        2022年4月1日 晚上
       </time>
     </span>
   
@@ -204,7 +205,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1k 字
     </span>
   
 
@@ -250,31 +251,14 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">快速排序</h1>
+            <h1 style="display: none">KMP</h1>
             
             <div class="markdown-body">
-              <h3 id="一、快排思想：分治"><a href="#一、快排思想：分治" class="headerlink" title="一、快排思想：分治"></a>一、快排思想：分治</h3><ol>
-<li><p>确定分界点 num</p>
-<blockquote>
-<p>A[left]、A[mid]、A[random]</p>
-</blockquote>
-</li>
-<li><p>调整范围</p>
-<blockquote>
-<p>使得 [左区间] ≤ num，[右区间] ≤ num</p>
-</blockquote>
-</li>
-<li><p>递归处理左右区间</p>
-<blockquote>
-<p>quickSort(A, left, j);</p>
-<p>quickSort(A, j + 1, right);</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="二、具体过程"><a href="#二、具体过程" class="headerlink" title="二、具体过程"></a>二、具体过程</h3><p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/quicksort.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="三、代码模板"><a href="#三、代码模板" class="headerlink" title="三、代码模板"></a>三、代码模板</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">quickSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] a, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (left &gt;= right) &#123;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">int</span> num = a[i + j &gt;&gt; <span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">int</span> i = left - <span class="hljs-number">1</span>, j = right + <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span> (i &lt; j) &#123;<br>        <span class="hljs-keyword">do</span> i ++; <span class="hljs-keyword">while</span> (a[i] &lt; num);	<span class="hljs-comment">// 注意是 &quot;＜&quot;，找到第一个 ≥ num 的数</span><br>        <span class="hljs-keyword">do</span> j --; <span class="hljs-keyword">while</span> (a[j] &gt; num);	<span class="hljs-comment">// 注意是 &quot;＜&quot;，找到第一个 ≤ num 的数</span><br>        <span class="hljs-keyword">if</span> (i &lt; j) &#123;<br>            <span class="hljs-keyword">int</span> tmp = a[i];<br>            a[i] = a[j];<br>            a[j] = tmp;<br>        &#125;<br>    &#125;<br>    quickSort(a, left, j);<br>    quickSort(a, j + <span class="hljs-number">1</span>, right);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+              <h4 id="1-求-next-数组"><a href="#1-求-next-数组" class="headerlink" title="1.求 next 数组"></a>1.求 next 数组</h4><p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/next.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="2-KMP-匹配过程"><a href="#2-KMP-匹配过程" class="headerlink" title="2.KMP 匹配过程"></a>2.KMP 匹配过程</h4><p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/KMP.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="3-代码模板"><a href="#3-代码模板" class="headerlink" title="3.代码模板"></a>3.代码模板</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 求 Next 数组, 下标从 1 开始</span><br><span class="hljs-keyword">int</span>[] next = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m + <span class="hljs-number">1</span>];<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>, j = <span class="hljs-number">0</span>; i &lt;= m; i ++) &#123;<br>    <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; p[i] != p[j + <span class="hljs-number">1</span>]) &#123;<br>        j = next[j];<br>    &#125;   <br>    <span class="hljs-keyword">if</span> (p[i] == p[j + <span class="hljs-number">1</span>]) &#123;<br>        j ++;<br>    &#125;<br>    next[i] = j;<br>&#125;<br><br><span class="hljs-comment">// KMP</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>, j = <span class="hljs-number">0</span>; i &lt;= n; i ++) &#123;<br>    <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; s[i] != p[j + <span class="hljs-number">1</span>]) &#123;<br>        j = next[j];<br>    &#125;<br>    <span class="hljs-keyword">if</span> (s[i] == p[j + <span class="hljs-number">1</span>]) &#123;<br>        j ++;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (j == m) &#123;<br>        <span class="hljs-keyword">return</span> i - m;<br>    &#125;   <br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<h3 id="四、数组中的第K个最大元素"><a href="#四、数组中的第K个最大元素" class="headerlink" title="四、数组中的第K个最大元素"></a>四、<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/">数组中的第K个最大元素</a></h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">findKthLargest</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] a, <span class="hljs-keyword">int</span> k)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> quickSort(a, <span class="hljs-number">0</span>, a.length - <span class="hljs-number">1</span>, k - <span class="hljs-number">1</span>);<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">quickSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] a, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right, <span class="hljs-keyword">int</span> k)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (left &gt;= right) &#123;<br>            <span class="hljs-keyword">return</span> a[k];<br>        &#125;<br>        <span class="hljs-keyword">int</span> i = left - <span class="hljs-number">1</span>, j = right + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">int</span> num = a[i + j &gt;&gt; <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">while</span> (i &lt; j) &#123;<br>            <span class="hljs-keyword">do</span> i ++; <span class="hljs-keyword">while</span> (a[i] &gt; num);<br>            <span class="hljs-keyword">do</span> j --; <span class="hljs-keyword">while</span> (a[j] &lt; num);<br>            <span class="hljs-keyword">if</span> (i &lt; j) &#123;<br>                <span class="hljs-keyword">int</span> tmp = a[i];<br>                a[i] = a[j];<br>                a[j] = tmp;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// 判断第 K 大的数在哪个区间，不需要全部排序</span><br>        <span class="hljs-keyword">if</span> (j &gt;= k) &#123;<br>            <span class="hljs-keyword">return</span> quickSort(a, left, j, k);<br>        &#125;<br>        <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> quickSort(a, j + <span class="hljs-number">1</span>, right, k);<br>        &#125;    <br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h4 id="4-实现-strStr"><a href="#4-实现-strStr" class="headerlink" title="4.实现 strStr()"></a>4.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-strstr/">实现 strStr()</a></h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">strStr</span><span class="hljs-params">(String haystack, String needle)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (needle.isEmpty()) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">int</span> n = haystack.length();<br>        <span class="hljs-keyword">int</span> m = needle.length();<br>        <br>        haystack = <span class="hljs-string">&quot; &quot;</span> + haystack;<br>        needle = <span class="hljs-string">&quot; &quot;</span> + needle;<br>        <br>        <span class="hljs-keyword">char</span>[] s = haystack.toCharArray();<br>        <span class="hljs-keyword">char</span>[] p = needle.toCharArray();<br>        <br>        <span class="hljs-comment">// 求 Next 数组</span><br>        <span class="hljs-keyword">int</span>[] next = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>, j = <span class="hljs-number">0</span>; i &lt;= m; i ++) &#123;<br>            <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; p[i] != p[j + <span class="hljs-number">1</span>])   j = next[j];<br>            <span class="hljs-keyword">if</span> (p[i] == p[j + <span class="hljs-number">1</span>])   j ++;<br>            next[i] = j;<br>        &#125;<br><br>        <span class="hljs-comment">// KMP</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>, j = <span class="hljs-number">0</span>; i &lt;= n; i ++) &#123;<br>            <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; s[i] != p[j + <span class="hljs-number">1</span>])   j = next[j];<br>            <span class="hljs-keyword">if</span> (s[i] == p[j + <span class="hljs-number">1</span>])   j ++;<br>            <span class="hljs-keyword">if</span> (j == m) <span class="hljs-keyword">return</span> i - m;   <br>        &#125;<br><br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
             </div>
@@ -293,7 +277,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%9D%BF/">模板</a>
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%9D%BF-KMP/">模板, KMP</a>
                     
                   </div>
                 
@@ -310,18 +294,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/25/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">归并排序</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/21/Kubernetes-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                        <span class="hidden-mobile">Kubernetes 学习笔记</span>
+                      <a href="/2022/04/01/MySQL-%E6%B5%8B%E8%AF%95/">
+                        <span class="hidden-mobile">MySQL-测试</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
