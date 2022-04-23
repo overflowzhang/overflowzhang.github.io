@@ -16,16 +16,16 @@
   <meta name="author" content="虹猫少侠">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、锁的类别类别 共享锁（S锁）  事务要读取一条记录时，需要先获取该记录的S锁   独占锁（X锁）  事务要改动一条记录时，需要先获取该记录的X锁    其中，S锁与S锁兼容，S锁与X锁、X锁与X锁互斥。 InnoDB 中的行级锁： Record Lock  把一条记录上锁   Gap Lock  间隙锁：为了防止幻影记录，在一条记录前的间隙上锁，防止其他事务向这条记录前面的记录插入新纪录">
+    <meta name="description" content="一、锁的类别类别： 共享锁（S锁）  事务要读取一条记录时，需要先获取该记录的S锁   独占锁（X锁）  事务要改动一条记录时，需要先获取该记录的X锁    其中，S锁与S锁兼容，S锁与X锁、X锁与X锁互斥。 InnoDB 中的行级锁： Record Lock  把一条记录上锁   Gap Lock  间隙锁：为了防止幻影记录，在一条记录前的间隙上锁，防止其他事务向这条记录前面的记录插入新纪录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL-语句加锁分析">
 <meta property="og:url" content="http://example.com/2022/04/23/MySQL-%E8%AF%AD%E5%8F%A5%E5%8A%A0%E9%94%81%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="莫比乌斯的小纸条">
-<meta property="og:description" content="一、锁的类别类别 共享锁（S锁）  事务要读取一条记录时，需要先获取该记录的S锁   独占锁（X锁）  事务要改动一条记录时，需要先获取该记录的X锁    其中，S锁与S锁兼容，S锁与X锁、X锁与X锁互斥。 InnoDB 中的行级锁： Record Lock  把一条记录上锁   Gap Lock  间隙锁：为了防止幻影记录，在一条记录前的间隙上锁，防止其他事务向这条记录前面的记录插入新纪录">
+<meta property="og:description" content="一、锁的类别类别： 共享锁（S锁）  事务要读取一条记录时，需要先获取该记录的S锁   独占锁（X锁）  事务要改动一条记录时，需要先获取该记录的X锁    其中，S锁与S锁兼容，S锁与X锁、X锁与X锁互斥。 InnoDB 中的行级锁： Record Lock  把一条记录上锁   Gap Lock  间隙锁：为了防止幻影记录，在一条记录前的间隙上锁，防止其他事务向这条记录前面的记录插入新纪录">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.png">
 <meta property="article:published_time" content="2022-04-23T03:38:18.000Z">
-<meta property="article:modified_time" content="2022-04-23T08:49:26.451Z">
+<meta property="article:modified_time" content="2022-04-23T09:02:33.101Z">
 <meta property="article:author" content="虹猫少侠">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary_large_image">
@@ -204,7 +204,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      810 字
+      807 字
     </span>
   
 
@@ -253,7 +253,7 @@
             <h1 style="display: none">MySQL-语句加锁分析</h1>
             
             <div class="markdown-body">
-              <h3 id="一、锁的类别"><a href="#一、锁的类别" class="headerlink" title="一、锁的类别"></a>一、锁的类别</h3><h5 id="类别"><a href="#类别" class="headerlink" title="类别"></a>类别</h5><ul>
+              <h2 id="一、锁的类别"><a href="#一、锁的类别" class="headerlink" title="一、锁的类别"></a>一、锁的类别</h2><h3 id="类别："><a href="#类别：" class="headerlink" title="类别："></a>类别：</h3><ul>
 <li><p>共享锁（S锁）</p>
 <blockquote>
 <p>事务要读取一条记录时，需要先获取该记录的S锁</p>
@@ -266,7 +266,7 @@
 </li>
 </ul>
 <p>其中，S锁与S锁兼容，S锁与X锁、X锁与X锁互斥。</p>
-<h5 id="InnoDB-中的行级锁："><a href="#InnoDB-中的行级锁：" class="headerlink" title="InnoDB 中的行级锁："></a>InnoDB 中的行级锁：</h5><ul>
+<h3 id="InnoDB-中的行级锁："><a href="#InnoDB-中的行级锁：" class="headerlink" title="InnoDB 中的行级锁："></a>InnoDB 中的行级锁：</h3><ul>
 <li><p>Record Lock</p>
 <blockquote>
 <p>把一条记录上锁</p>
@@ -287,10 +287,10 @@
 <li><p>隐式锁</p>
 </li>
 </ul>
-<h3 id="二、语句加锁"><a href="#二、语句加锁" class="headerlink" title="二、语句加锁"></a>二、语句加锁</h3><h5 id="1-快照读"><a href="#1-快照读" class="headerlink" title="1.快照读"></a>1.快照读</h5><blockquote>
+<h2 id="二、语句加锁"><a href="#二、语句加锁" class="headerlink" title="二、语句加锁"></a>二、语句加锁</h2><h3 id="1-快照读"><a href="#1-快照读" class="headerlink" title="1.快照读"></a>1.快照读</h3><blockquote>
 <p>不加锁</p>
 </blockquote>
-<h5 id="2-锁定读"><a href="#2-锁定读" class="headerlink" title="2.锁定读"></a>2.锁定读</h5><ul>
+<h3 id="2-锁定读"><a href="#2-锁定读" class="headerlink" title="2.锁定读"></a>2.锁定读</h3><ul>
 <li>SELECT…LOCK IN SHARE MODE（S锁）</li>
 <li>SELECT…FOR UPDATE（X锁）</li>
 <li>UPDATE…（X锁）</li>
@@ -299,7 +299,7 @@
 <blockquote>
 <p>update 和 delete 需要定位记录并加锁，也可以认为是一种锁定读</p>
 </blockquote>
-<h5 id="3-加锁过程"><a href="#3-加锁过程" class="headerlink" title="3.加锁过程"></a>3.加锁过程</h5><ol>
+<h3 id="3-加锁过程"><a href="#3-加锁过程" class="headerlink" title="3.加锁过程"></a>3.加锁过程</h3><ol>
 <li>在 B+ 树叶子节点中定位到该扫描区间中的第一条记录</li>
 <li><strong>为当前记录加锁</strong>（锁类型视隔离级别而定）</li>
 <li>判断索引条件下推的条件是否成立</li>
@@ -312,18 +312,16 @@
 <blockquote>
 <p>索引下推：在索引遍历过程中，对索引中包含的字段先做判断，直接过滤掉不满足条件的记录，减少回表次数</p>
 </blockquote>
-<h3 id="三、分类分析"><a href="#三、分类分析" class="headerlink" title="三、分类分析"></a>三、分类分析</h3><h5 id="1-隔离级别"><a href="#1-隔离级别" class="headerlink" title="1.隔离级别"></a>1.隔离级别</h5><p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="三、分类分析"><a href="#三、分类分析" class="headerlink" title="三、分类分析"></a>三、分类分析</h2><h3 id="1-隔离级别"><a href="#1-隔离级别" class="headerlink" title="1.隔离级别"></a>1.隔离级别</h3><p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.png" srcset="/img/loading.gif" lazyload></p>
 <p>在<strong>低</strong>隔离级别下，步骤2 加锁类型为 Record Lock；</p>
 <p>在<strong>高</strong>隔离级别下，步骤2 加锁类型为 Next-Key Lock；</p>
-<h5 id="2-聚簇索引-VS-二级索引"><a href="#2-聚簇索引-VS-二级索引" class="headerlink" title="2.聚簇索引 VS 二级索引"></a>2.聚簇索引 VS 二级索引</h5><p><strong>聚簇索引</strong></p>
-<ul>
+<h3 id="2-聚簇索引-VS-二级索引"><a href="#2-聚簇索引-VS-二级索引" class="headerlink" title="2.聚簇索引 VS 二级索引"></a>2.聚簇索引 VS 二级索引</h3><h4 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h4><ul>
 <li><p>步骤2 中没有索引下推的条件</p>
 </li>
 <li><p>步骤4 中不需要进行回表操作</p>
 </li>
 </ul>
-<p><strong>二级索引</strong></p>
-<ul>
+<h4 id="二级索引"><a href="#二级索引" class="headerlink" title="二级索引"></a>二级索引</h4><ul>
 <li><p>步骤2 对二级索引记录加锁后，步骤4 回表对聚簇索引记录加锁</p>
 </li>
 <li><p>步骤3 若索引下推判断记录不符合条件，无需回表，但并<strong>不会释放</strong>此二级索引记录上的锁</p>
@@ -331,21 +329,15 @@
 <li><p>步骤6 是否释放锁，需要看隔离级别，如下 ↓</p>
 </li>
 </ul>
-<p><strong>释放锁</strong></p>
-<p>在步骤6 中，server 层对记录进一步判断是否符合条件，若不符合：</p>
+<h4 id="释放锁"><a href="#释放锁" class="headerlink" title="释放锁"></a>释放锁</h4><p>在步骤6 中，server 层对记录进一步判断是否符合条件，若不符合：</p>
 <ul>
 <li>在低隔离级别下，释放锁</li>
 <li>在高隔离级别下，不释放锁</li>
 </ul>
 <div class="note note-info">
-            <p>参考：</p>
+            <p>参考</p>
           </div>
 
-
-
-
-
-<p>参考：</p>
 <p>《MySQL 45讲》</p>
 <p>《MySQL 是怎么样运行的》</p>
 
