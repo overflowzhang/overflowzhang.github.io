@@ -4,6 +4,94 @@
   
   
   <entry>
+    <title>MySQL-语句加锁分析</title>
+    <link href="/2022/04/23/MySQL-%E8%AF%AD%E5%8F%A5%E5%8A%A0%E9%94%81%E5%88%86%E6%9E%90/"/>
+    <url>/2022/04/23/MySQL-%E8%AF%AD%E5%8F%A5%E5%8A%A0%E9%94%81%E5%88%86%E6%9E%90/</url>
+    
+    <content type="html"><![CDATA[<h3 id="一、锁的类别"><a href="#一、锁的类别" class="headerlink" title="一、锁的类别"></a>一、锁的类别</h3><h5 id="类别"><a href="#类别" class="headerlink" title="类别"></a>类别</h5><ul><li><p>共享锁（S锁）</p><blockquote><p>事务要读取一条记录时，需要先获取该记录的S锁</p></blockquote></li><li><p>独占锁（X锁）</p><blockquote><p>事务要改动一条记录时，需要先获取该记录的X锁</p></blockquote></li></ul><p>其中，S锁与S锁兼容，S锁与X锁、X锁与X锁互斥。</p><h5 id="InnoDB-中的行级锁："><a href="#InnoDB-中的行级锁：" class="headerlink" title="InnoDB 中的行级锁："></a>InnoDB 中的行级锁：</h5><ul><li><p>Record Lock</p><blockquote><p>把一条记录上锁</p></blockquote></li><li><p>Gap Lock</p><blockquote><p>间隙锁：为了防止幻影记录，在一条记录前的间隙上锁，防止其他事务向这条记录前面的记录插入新纪录</p></blockquote></li><li><p>Next-Key Lock</p><blockquote><p>Record Lock + Gap Lock</p></blockquote></li><li><p>Insert Intention Lock</p></li><li><p>隐式锁</p></li></ul><h3 id="二、语句加锁"><a href="#二、语句加锁" class="headerlink" title="二、语句加锁"></a>二、语句加锁</h3><h5 id="1-快照读"><a href="#1-快照读" class="headerlink" title="1.快照读"></a>1.快照读</h5><blockquote><p>不加锁</p></blockquote><h5 id="2-锁定读"><a href="#2-锁定读" class="headerlink" title="2.锁定读"></a>2.锁定读</h5><ul><li>SELECT…LOCK IN SHARE MODE（S锁）</li><li>SELECT…FOR UPDATE（X锁）</li><li>UPDATE…（X锁）</li><li>DELETE…（X锁）</li></ul><blockquote><p>update 和 delete 需要定位记录并加锁，也可以认为是一种锁定读</p></blockquote><h5 id="3-加锁过程"><a href="#3-加锁过程" class="headerlink" title="3.加锁过程"></a>3.加锁过程</h5><ol><li>在 B+ 树叶子节点中定位到该扫描区间中的第一条记录</li><li><strong>为当前记录加锁</strong>（锁类型视隔离级别而定）</li><li>判断索引条件下推的条件是否成立</li><li>执行回表操作</li><li>判断边际条件是否成立</li><li>server 层判断其余搜索条件是否成立</li><li>获取当前记录所在单向链表的下一条记录，执行步骤2</li></ol><p>备注：</p><blockquote><p>索引下推：在索引遍历过程中，对索引中包含的字段先做判断，直接过滤掉不满足条件的记录，减少回表次数</p></blockquote><h3 id="三、分类分析"><a href="#三、分类分析" class="headerlink" title="三、分类分析"></a>三、分类分析</h3><h5 id="1-隔离级别"><a href="#1-隔离级别" class="headerlink" title="1.隔离级别"></a>1.隔离级别</h5><p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.png"></p><p>在<strong>低</strong>隔离级别下，步骤2 加锁类型为 Record Lock；</p><p>在<strong>高</strong>隔离级别下，步骤2 加锁类型为 Next-Key Lock；</p><h5 id="2-聚簇索引-VS-二级索引"><a href="#2-聚簇索引-VS-二级索引" class="headerlink" title="2.聚簇索引 VS 二级索引"></a>2.聚簇索引 VS 二级索引</h5><p><strong>聚簇索引</strong></p><ul><li><p>步骤2 中没有索引下推的条件</p></li><li><p>步骤4 中不需要进行回表操作</p></li></ul><p><strong>二级索引</strong></p><ul><li><p>步骤2 对二级索引记录加锁后，步骤4 回表对聚簇索引记录加锁</p></li><li><p>步骤3 若索引下推判断记录不符合条件，无需回表，但并<strong>不会释放</strong>此二级索引记录上的锁</p></li><li><p>步骤6 是否释放锁，需要看隔离级别，如下 ↓</p></li></ul><p><strong>释放锁</strong></p><p>在步骤6 中，server 层对记录进一步判断是否符合条件，若不符合：</p><ul><li>在低隔离级别下，释放锁</li><li>在高隔离级别下，不释放锁</li></ul><div class="note note-info">            <p>参考：</p>          </div><p>参考：</p><p>《MySQL 45讲》</p><p>《MySQL 是怎么样运行的》</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>MySQL</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>MySQL</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>图的存储与遍历</title>
+    <link href="/2022/04/19/%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E4%B8%8E%E9%81%8D%E5%8E%86/"/>
+    <url>/2022/04/19/%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E4%B8%8E%E9%81%8D%E5%8E%86/</url>
+    
+    <content type="html"><![CDATA[<h3 id="图的存储"><a href="#图的存储" class="headerlink" title="图的存储"></a>图的存储</h3><h4 id="链式前向星"><a href="#链式前向星" class="headerlink" title="链式前向星"></a>链式前向星</h4><h5 id="1-建立过程"><a href="#1-建立过程" class="headerlink" title="1.建立过程"></a>1.建立过程</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">input:<br>u vw<br><span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">1</span><br><span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span><br><span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">3</span><br><span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span><br><span class="hljs-number">4</span> <span class="hljs-number">1</span> <span class="hljs-number">5</span><br><span class="hljs-number">1</span> <span class="hljs-number">5</span> <span class="hljs-number">6</span><br><span class="hljs-number">4</span> <span class="hljs-number">5</span> <span class="hljs-number">7</span><br></code></pre></div></td></tr></table></figure><p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E9%93%BE%E5%BC%8F%E5%89%8D%E5%90%91%E6%98%9F.png"></p><h5 id="2-存储结构"><a href="#2-存储结构" class="headerlink" title="2.存储结构"></a>2.存储结构</h5><ul><li>e[i]: 第 i 条边指向的节点 (u)</li><li>ne[i]: 第 i 条边的下一条边</li><li>w[i]: 第 i 条边的权重</li><li>h[i]: 节点 i 为起点的第一条边</li></ul><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u, <span class="hljs-keyword">int</span> v, <span class="hljs-keyword">int</span> x)</span> </span>&#123;<br>    e[idx] = v;<br>    ne[idx] = h[u];<br>    w[idx] = x;<br>    h[u] = idx ++;<br>&#125;<br></code></pre></div></td></tr></table></figure><h3 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h3><h4 id="1-DFS"><a href="#1-DFS" class="headerlink" title="1.DFS"></a>1.DFS</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span> </span>&#123;<br>    System.out.print(u + <span class="hljs-string">&quot; &quot;</span>);<br>    <span class="hljs-comment">// 标记已访问</span><br>    v[u] = <span class="hljs-keyword">true</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = h[u]; i != -<span class="hljs-number">1</span>; i = ne[i]) &#123;<br>        <span class="hljs-keyword">int</span> j = e[i];<br>        <span class="hljs-keyword">if</span> (!v[j]) &#123;<br>            dfs(j);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><h4 id="2-BFS"><a href="#2-BFS" class="headerlink" title="2.BFS"></a>2.BFS</h4><h4 id="3-拓扑排序"><a href="#3-拓扑排序" class="headerlink" title="3.拓扑排序"></a>3.拓扑排序</h4><h3 id="最短路径"><a href="#最短路径" class="headerlink" title="最短路径"></a>最短路径</h3><h4 id="1-Dijkstra"><a href="#1-Dijkstra" class="headerlink" title="1.Dijkstra"></a>1.Dijkstra</h4><h4 id="2-Floyd"><a href="#2-Floyd" class="headerlink" title="2.Floyd"></a>2.Floyd</h4><h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><h4 id="1-判断图中有没有环"><a href="#1-判断图中有没有环" class="headerlink" title="1.判断图中有没有环"></a>1.判断图中有没有环</h4>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>模板, 图, DFS, BFS</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>LeetCode-Java-API</title>
+    <link href="/2022/04/09/LeetCode-Java-API/"/>
+    <url>/2022/04/09/LeetCode-Java-API/</url>
+    
+    <content type="html"><![CDATA[<h4 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h4><p>格式化输出浮点数</p><p>String.format(“%.2f”,  d)</p><h4 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h4><ul><li>排序部分数组<br>Arrays.sort(a, begin, end)：其中不包括a[end]</li><li>数组批量赋值<br>Arrays.fill( arr, 0)</li><li>数组对比<br>Arrays.equals ( arr1, arr2 )</li><li>自定义排序规则<br>Arrays.sort(intervals, (v1,v2) -&gt; v1[0] - v2[0])<br>避免差值过大导致溢出，用 Integer.compare(a, b)<br>Arrays.sort(points, (a, b) -&gt; Integer.compare(a[1], b[1]));</li><li>数组拷贝<br>Arrays.copyOfRange(res, 0, index + 1) 左闭右开</li><li>List 转 二维数组<br>List answer = new ArrayList&lt;&gt;();<br>return (int[][])answer.toArray(new int[0][]);</li><li>数字转字符数组<br>char[] arr = (n + “”).toCharArray();</li><li>初始化 List<br>List<Integer> test = Arrays.asList(1, 2, 3);</li></ul><h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><ul><li>检测字符串是否以指定的前缀开始<br>public boolean startsWith(String prefix, int toffset)</li><li>字符串 =&gt; 字符数组<br>char[] s = str.toCharArray()</li><li>字符数组 =&gt; 字符串<br>String s = String.valueOf(c)</li><li>字符=&gt; 字符串<br>String s = “” + c</li><li>StringBuffer（）<br>StringBuffer  s = new StringBuffer();<br>s.append( c );<br>s.toString();</li><li>String.join(“”, list)<br>将数组中的元素用字符串””拼接</li><li>s.trim()<br>删除首尾空白符</li></ul><h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><p>双端队列</p><p>优先队列</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法笔记</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>SQL-语法</title>
+    <link href="/2022/04/06/SQL-%E8%AF%AD%E6%B3%95/"/>
+    <url>/2022/04/06/SQL-%E8%AF%AD%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<p>round(a,x)：四舍五入保留 a 的 x 位小数</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>MySQL</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>KMP</title>
     <link href="/2022/04/01/KMP/"/>
     <url>/2022/04/01/KMP/</url>

@@ -16,24 +16,23 @@
   <meta name="author" content="虹猫少侠">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1.求 next 数组 2.KMP 匹配过程 3.代码模板123456789101112131415161718192021222324&#x2F;&#x2F; 求 Next 数组, 下标从 1 开始int[] next &#x3D; new int[m + 1];for (int i &#x3D; 2, j &#x3D; 0; i &lt;&#x3D; m; i ++) &amp;#123;    while (j &gt; 0 &amp;&amp; p[i]">
+    <meta name="description" content="图的存储链式前向星1.建立过程123456789input:u v	w1 2 12 3 23 4 31 3 44 1 51 5 64 5 7   2.存储结构 e[i]: 第 i 条边指向的节点 (u) ne[i]: 第 i 条边的下一条边 w[i]: 第 i 条边的权重 h[i]: 节点 i 为起点的第一条边  123456public void add(int u, int v, int x)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KMP">
-<meta property="og:url" content="http://example.com/2022/04/01/KMP/index.html">
+<meta property="og:title" content="图的存储与遍历">
+<meta property="og:url" content="http://example.com/2022/04/19/%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E4%B8%8E%E9%81%8D%E5%8E%86/index.html">
 <meta property="og:site_name" content="莫比乌斯的小纸条">
-<meta property="og:description" content="1.求 next 数组 2.KMP 匹配过程 3.代码模板123456789101112131415161718192021222324&#x2F;&#x2F; 求 Next 数组, 下标从 1 开始int[] next &#x3D; new int[m + 1];for (int i &#x3D; 2, j &#x3D; 0; i &lt;&#x3D; m; i ++) &amp;#123;    while (j &gt; 0 &amp;&amp; p[i]">
+<meta property="og:description" content="图的存储链式前向星1.建立过程123456789input:u v	w1 2 12 3 23 4 31 3 44 1 51 5 64 5 7   2.存储结构 e[i]: 第 i 条边指向的节点 (u) ne[i]: 第 i 条边的下一条边 w[i]: 第 i 条边的权重 h[i]: 节点 i 为起点的第一条边  123456public void add(int u, int v, int x)">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/next.png">
-<meta property="og:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/KMP.png">
-<meta property="article:published_time" content="2022-04-01T14:40:06.000Z">
-<meta property="article:modified_time" content="2022-04-03T08:53:07.252Z">
+<meta property="og:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E9%93%BE%E5%BC%8F%E5%89%8D%E5%90%91%E6%98%9F.png">
+<meta property="article:published_time" content="2022-04-19T09:58:02.000Z">
+<meta property="article:modified_time" content="2022-04-20T03:07:59.059Z">
 <meta property="article:author" content="虹猫少侠">
-<meta property="article:tag" content="模板, KMP">
+<meta property="article:tag" content="模板, 图, DFS, BFS">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/next.png">
+<meta name="twitter:image" content="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E9%93%BE%E5%BC%8F%E5%89%8D%E5%90%91%E6%98%9F.png">
   
   
-  <title>KMP - 莫比乌斯的小纸条</title>
+  <title>图的存储与遍历 - 莫比乌斯的小纸条</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -179,7 +178,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="KMP">
+            <span class="h2" id="subtitle" title="图的存储与遍历">
               
             </span>
 
@@ -194,8 +193,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-04-01 22:40" pubdate>
-        2022年4月1日 晚上
+      <time datetime="2022-04-19 17:58" pubdate>
+        2022年4月19日 下午
       </time>
     </span>
   
@@ -205,7 +204,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1k 字
+      437 字
     </span>
   
 
@@ -214,7 +213,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6 分钟
+      3 分钟
     </span>
   
 
@@ -251,16 +250,29 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">KMP</h1>
+            <h1 style="display: none">图的存储与遍历</h1>
             
             <div class="markdown-body">
-              <h4 id="1-求-next-数组"><a href="#1-求-next-数组" class="headerlink" title="1.求 next 数组"></a>1.求 next 数组</h4><p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/next.png" srcset="/img/loading.gif" lazyload></p>
-<h4 id="2-KMP-匹配过程"><a href="#2-KMP-匹配过程" class="headerlink" title="2.KMP 匹配过程"></a>2.KMP 匹配过程</h4><p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/KMP.png" srcset="/img/loading.gif" lazyload></p>
-<h4 id="3-代码模板"><a href="#3-代码模板" class="headerlink" title="3.代码模板"></a>3.代码模板</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 求 Next 数组, 下标从 1 开始</span><br><span class="hljs-keyword">int</span>[] next = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m + <span class="hljs-number">1</span>];<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>, j = <span class="hljs-number">0</span>; i &lt;= m; i ++) &#123;<br>    <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; p[i] != p[j + <span class="hljs-number">1</span>]) &#123;<br>        j = next[j];<br>    &#125;   <br>    <span class="hljs-keyword">if</span> (p[i] == p[j + <span class="hljs-number">1</span>]) &#123;<br>        j ++;<br>    &#125;<br>    next[i] = j;<br>&#125;<br><br><span class="hljs-comment">// KMP</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>, j = <span class="hljs-number">0</span>; i &lt;= n; i ++) &#123;<br>    <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; s[i] != p[j + <span class="hljs-number">1</span>]) &#123;<br>        j = next[j];<br>    &#125;<br>    <span class="hljs-keyword">if</span> (s[i] == p[j + <span class="hljs-number">1</span>]) &#123;<br>        j ++;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (j == m) &#123;<br>        <span class="hljs-keyword">return</span> i - m;<br>    &#125;   <br>&#125;<br></code></pre></div></td></tr></table></figure>
+              <h3 id="图的存储"><a href="#图的存储" class="headerlink" title="图的存储"></a>图的存储</h3><h4 id="链式前向星"><a href="#链式前向星" class="headerlink" title="链式前向星"></a>链式前向星</h4><h5 id="1-建立过程"><a href="#1-建立过程" class="headerlink" title="1.建立过程"></a>1.建立过程</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">input:<br>u v	w<br><span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">1</span><br><span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span><br><span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">3</span><br><span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span><br><span class="hljs-number">4</span> <span class="hljs-number">1</span> <span class="hljs-number">5</span><br><span class="hljs-number">1</span> <span class="hljs-number">5</span> <span class="hljs-number">6</span><br><span class="hljs-number">4</span> <span class="hljs-number">5</span> <span class="hljs-number">7</span><br></code></pre></div></td></tr></table></figure>
 
-<h4 id="4-实现-strStr"><a href="#4-实现-strStr" class="headerlink" title="4.实现 strStr()"></a>4.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-strstr/">实现 strStr()</a></h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">strStr</span><span class="hljs-params">(String haystack, String needle)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (needle.isEmpty()) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">int</span> n = haystack.length();<br>        <span class="hljs-keyword">int</span> m = needle.length();<br>        <br>        haystack = <span class="hljs-string">&quot; &quot;</span> + haystack;<br>        needle = <span class="hljs-string">&quot; &quot;</span> + needle;<br>        <br>        <span class="hljs-keyword">char</span>[] s = haystack.toCharArray();<br>        <span class="hljs-keyword">char</span>[] p = needle.toCharArray();<br>        <br>        <span class="hljs-comment">// 求 Next 数组</span><br>        <span class="hljs-keyword">int</span>[] next = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>, j = <span class="hljs-number">0</span>; i &lt;= m; i ++) &#123;<br>            <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; p[i] != p[j + <span class="hljs-number">1</span>])   j = next[j];<br>            <span class="hljs-keyword">if</span> (p[i] == p[j + <span class="hljs-number">1</span>])   j ++;<br>            next[i] = j;<br>        &#125;<br><br>        <span class="hljs-comment">// KMP</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>, j = <span class="hljs-number">0</span>; i &lt;= n; i ++) &#123;<br>            <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; s[i] != p[j + <span class="hljs-number">1</span>])   j = next[j];<br>            <span class="hljs-keyword">if</span> (s[i] == p[j + <span class="hljs-number">1</span>])   j ++;<br>            <span class="hljs-keyword">if</span> (j == m) <span class="hljs-keyword">return</span> i - m;   <br>        &#125;<br><br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://redcathost.oss-cn-beijing.aliyuncs.com/Image-Host/%E9%93%BE%E5%BC%8F%E5%89%8D%E5%90%91%E6%98%9F.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="2-存储结构"><a href="#2-存储结构" class="headerlink" title="2.存储结构"></a>2.存储结构</h5><ul>
+<li>e[i]: 第 i 条边指向的节点 (u)</li>
+<li>ne[i]: 第 i 条边的下一条边</li>
+<li>w[i]: 第 i 条边的权重</li>
+<li>h[i]: 节点 i 为起点的第一条边</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u, <span class="hljs-keyword">int</span> v, <span class="hljs-keyword">int</span> x)</span> </span>&#123;<br>    e[idx] = v;<br>    ne[idx] = h[u];<br>    w[idx] = x;<br>    h[u] = idx ++;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
+
+
+
+
+
+<h3 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h3><h4 id="1-DFS"><a href="#1-DFS" class="headerlink" title="1.DFS"></a>1.DFS</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span> </span>&#123;<br>    System.out.print(u + <span class="hljs-string">&quot; &quot;</span>);<br>    <span class="hljs-comment">// 标记已访问</span><br>    v[u] = <span class="hljs-keyword">true</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = h[u]; i != -<span class="hljs-number">1</span>; i = ne[i]) &#123;<br>        <span class="hljs-keyword">int</span> j = e[i];<br>        <span class="hljs-keyword">if</span> (!v[j]) &#123;<br>            dfs(j);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-BFS"><a href="#2-BFS" class="headerlink" title="2.BFS"></a>2.BFS</h4><h4 id="3-拓扑排序"><a href="#3-拓扑排序" class="headerlink" title="3.拓扑排序"></a>3.拓扑排序</h4><h3 id="最短路径"><a href="#最短路径" class="headerlink" title="最短路径"></a>最短路径</h3><h4 id="1-Dijkstra"><a href="#1-Dijkstra" class="headerlink" title="1.Dijkstra"></a>1.Dijkstra</h4><h4 id="2-Floyd"><a href="#2-Floyd" class="headerlink" title="2.Floyd"></a>2.Floyd</h4><h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><h4 id="1-判断图中有没有环"><a href="#1-判断图中有没有环" class="headerlink" title="1.判断图中有没有环"></a>1.判断图中有没有环</h4>
             </div>
             <hr>
             <div>
@@ -277,7 +289,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%9D%BF-KMP/">模板, KMP</a>
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%9D%BF-%E5%9B%BE-DFS-BFS/">模板, 图, DFS, BFS</a>
                     
                   </div>
                 
@@ -294,9 +306,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/04/06/SQL-%E8%AF%AD%E6%B3%95/">
+                      <a href="/2022/04/23/MySQL-%E8%AF%AD%E5%8F%A5%E5%8A%A0%E9%94%81%E5%88%86%E6%9E%90/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SQL-语法</span>
+                        <span class="hidden-mobile">MySQL-语句加锁分析</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -304,8 +316,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/04/01/MySQL-%E6%B5%8B%E8%AF%95/">
-                        <span class="hidden-mobile">MySQL-测试</span>
+                      <a href="/2022/04/09/LeetCode-Java-API/">
+                        <span class="hidden-mobile">LeetCode-Java-API</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
