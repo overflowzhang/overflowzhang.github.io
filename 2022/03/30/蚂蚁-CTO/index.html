@@ -16,18 +16,20 @@
   <meta name="author" content="虹猫少侠">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="SQL-语法">
-<meta property="og:url" content="http://example.com/2022/04/06/SQL-%E8%AF%AD%E6%B3%95/index.html">
+    <meta name="description" content="K8s 管理节点的创建和删除需要注意哪些事项 ？ K8s 如何统一管理 Pod ？ K8s对 Pod 的调度有了解过吗 ？ 你那个服务是占了多少核多少G的Pod 呢 ？ 有调过 JVM 中的一些参数吗 ？ 有分析过项目中导致OOM的原因吗 ？ 调节 Eden 和 Survivor 的比例，有什么效果，什么时候有必要调呢 ？ 那把 Eden 的比例调大的缺点是什么呢 ？ 垃圾回收器有了解过吗，CM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="蚂蚁-CTO">
+<meta property="og:url" content="http://example.com/2022/03/30/%E8%9A%82%E8%9A%81-CTO/index.html">
 <meta property="og:site_name" content="莫比乌斯的小纸条">
+<meta property="og:description" content="K8s 管理节点的创建和删除需要注意哪些事项 ？ K8s 如何统一管理 Pod ？ K8s对 Pod 的调度有了解过吗 ？ 你那个服务是占了多少核多少G的Pod 呢 ？ 有调过 JVM 中的一些参数吗 ？ 有分析过项目中导致OOM的原因吗 ？ 调节 Eden 和 Survivor 的比例，有什么效果，什么时候有必要调呢 ？ 那把 Eden 的比例调大的缺点是什么呢 ？ 垃圾回收器有了解过吗，CM">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-04-06T02:39:44.000Z">
-<meta property="article:modified_time" content="2022-05-02T04:43:51.961Z">
+<meta property="article:published_time" content="2022-03-30T12:20:21.000Z">
+<meta property="article:modified_time" content="2022-05-14T12:26:50.863Z">
 <meta property="article:author" content="虹猫少侠">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>SQL-语法 - 莫比乌斯的小纸条</title>
+  <title>蚂蚁-CTO - 莫比乌斯的小纸条</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -173,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="SQL-语法">
+            <span class="h2" id="subtitle" title="蚂蚁-CTO">
               
             </span>
 
@@ -188,8 +190,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-04-06 10:39" pubdate>
-        2022年4月6日 上午
+      <time datetime="2022-03-30 20:20" pubdate>
+        2022年3月30日 晚上
       </time>
     </span>
   
@@ -199,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      866 字
     </span>
   
 
@@ -208,7 +210,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1 分钟
+      5 分钟
     </span>
   
 
@@ -245,10 +247,63 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SQL-语法</h1>
+            <h1 style="display: none">蚂蚁-CTO</h1>
             
             <div class="markdown-body">
-              
+              <ol>
+<li>K8s 管理节点的创建和删除需要注意哪些事项 ？</li>
+<li>K8s 如何统一管理 Pod ？</li>
+<li>K8s对 Pod 的调度有了解过吗 ？</li>
+<li>你那个服务是占了多少核多少G的Pod 呢 ？</li>
+<li>有调过 JVM 中的一些参数吗 ？</li>
+<li>有分析过项目中导致OOM的原因吗 ？</li>
+<li>调节 Eden 和 Survivor 的比例，有什么效果，什么时候有必要调呢 ？</li>
+<li>那把 Eden 的比例调大的缺点是什么呢 ？</li>
+<li>垃圾回收器有了解过吗，CMS 和 G1 有什么优劣呢 ？</li>
+<li>JVM 运行时数据区还包括哪些，分别存什么 ？</li>
+<li>堆外内存有了解过吗 ？这片区域一般是什么情况下会用到 ？</li>
+<li>项目开发中有读过文件吗 ？</li>
+<li>线程的生命周期 ？</li>
+<li>线程中断用到哪个关键字 ？</li>
+<li>线程池有了解吗 ？</li>
+<li>线程池解决了原生线程的什么缺陷 ？</li>
+<li>内存泄漏和内存溢出的区别 ？</li>
+<li>遇到死锁问题的时候你是什么怎么排查的 ？</li>
+<li>一般什么情况下会导致死锁呢 ？</li>
+<li>Java 的加锁有几种方式 ？</li>
+<li>为什么 volatile 不能用来加锁呢 ？</li>
+<li>自旋锁的原理是什么呢 ？效率怎么样 ？</li>
+<li>乐观锁和悲观锁 ？</li>
+<li>项目中有用到过阻塞队列 ？</li>
+<li>MQTT 介绍一下 ？它是如何保证幂等性的呢 ？</li>
+<li>Token 为什么放到 Redis 里面，没有放到 MySQL ？</li>
+<li>Redis 数据恢复是怎么做的 ？</li>
+<li>Redis 中的数据类型 ？</li>
+</ol>
+<hr>
+<ol>
+<li>K8s 中的 API Server 是做什么的 ？</li>
+<li>K8s 怎么实现副本扩容 ？</li>
+<li>数据库事务是一个什么样的概念 ？</li>
+<li>数据库的隔离级别 ？</li>
+<li>几种隔离级别分别解决了什么问题 ？</li>
+<li>数据库的锁是一个什么概念 ？</li>
+<li>除了读写锁之外，乐观锁和悲观锁了解吗 ？</li>
+<li>什么情况下会用到表锁 ？</li>
+<li>select * from user where name = “ABC”，分析对哪些数据加锁的 ？</li>
+</ol>
+<hr>
+<ol>
+<li>Spring 中的 IoC 是一个什么概念 ？</li>
+<li>Sorted Set 的底层数据结构 ？</li>
+<li>描述一下 B+ 树的结构以及插入一个元素的过程 ？</li>
+<li>InnoDB 为什么用 B+ 树，不用二叉树，红黑树或跳表 ？</li>
+<li>B+ 树能减少磁盘 I/O ？为什么 ？</li>
+<li>I/O 次数少根本上的原因是什么，只是因为层级减少吗 ？</li>
+<li>现在启动了一个线程，通过 Socket 读取远端的一个文件，要求 30s 内读完，如果没读完，将其终止掉，你会怎么设计这样一个<strong>终止</strong>的机制呢（终止这个读文件的线程）？</li>
+<li>你对 interrupt() 有更深入的了解吗 ？它一定能中断吗 ？</li>
+</ol>
+
             </div>
             <hr>
             <div>
@@ -257,7 +312,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/MySQL/">MySQL</a>
+                      <a class="hover-with-bg" href="/categories/%E9%9D%A2%E7%BB%8F/">面经</a>
                     
                   </div>
                 
@@ -275,9 +330,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/04/09/LeetCode-Java-API/">
+                      <a href="/2022/04/01/MySQL-%E6%B5%8B%E8%AF%95/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LeetCode-Java-API</span>
+                        <span class="hidden-mobile">MySQL-测试</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -285,8 +340,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/04/01/KMP/">
-                        <span class="hidden-mobile">KMP</span>
+                      <a href="/2022/03/30/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/">
+                        <span class="hidden-mobile">二叉树的遍历</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
